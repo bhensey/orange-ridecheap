@@ -1,0 +1,9 @@
+result {
+  width: 200px;
+}
+
+rideService,
+priceData {
+  display: inline-block;
+  width: 50px;
+}

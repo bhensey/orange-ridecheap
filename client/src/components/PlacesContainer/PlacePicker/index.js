@@ -20,7 +20,10 @@ export default class PlacePicker extends Component {
   render() {
     return (
       <div>
-        <Geosuggest onSuggestSelect={this.onSuggestSelect} />
+        <Geosuggest
+          onSuggestSelect={this.onSuggestSelect}
+          placeholder="Enter Location" // {this.props.placeholder}
+        />
       </div>
     );
   }

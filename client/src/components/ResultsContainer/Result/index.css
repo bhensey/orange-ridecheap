@@ -1,9 +1,31 @@
-result {
-  width: 200px;
+.result {
+  border: solid 1px black;
+  width: 100%;
+  text-align: left;
+  margin: 40px 0;
+  background-color: black;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 2px #303030;
 }
 
-rideService,
-priceData {
+.rideService,
+.priceData,
+.average {
   display: inline-block;
-  width: 50px;
+  color: white;
+}
+
+.rideService {
+  width: 100px;
+  font-size: 30px;
+  padding: 5px;
+  margin-left: 5px;
+}
+
+.priceData {
+  font-size: 30px;
+}
+
+.average {
 }

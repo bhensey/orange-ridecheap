@@ -1,8 +1,10 @@
 from flask import Flask, jsonify;
+from flask_cors import CORS
 from lyft import lyft;
 from uber import uber;
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route("/api/v1/lyft", methods=['GET'])
 def lyftestimate():

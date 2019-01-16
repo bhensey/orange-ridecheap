@@ -1,6 +1,5 @@
 import React from "react";
 import "./index.css";
-import { Row, Col } from "react-bootstrap";
 
 export default class Result extends React.Component {
   constructor(props) {
@@ -18,6 +17,7 @@ export default class Result extends React.Component {
         <img
           src={require(`./${this.props.data.rideService}.png`)}
           className="rideService"
+          alt={this.props.data.rideService}
         />
         <div className="priceData">{this.props.data.priceData.price}</div>
         <div className="average"> AVG </div>

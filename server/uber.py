@@ -1,9 +1,10 @@
 from uber_rides.session import Session
 from uber_rides.client import UberRidesClient
+import config
 
 class uber:
     def getUberEstimate():
-        session = Session(server_token="gzsnR5HAFRcEA_q9AVSZX7tEGE1_7ayhiVYwZk3r")
+        session = Session(server_token=config.uber['server_token'])
         client = UberRidesClient(session)
 
         response = client.get_products(37.77, -122.41)

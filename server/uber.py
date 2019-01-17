@@ -19,7 +19,10 @@ class uber:
     	)
 
         estimate = response.json.get('prices')
-        
+        print(estimate)
+        del estimate[0]
+        print(estimate)
+
         results = []
         for x in estimate:
           # TODO

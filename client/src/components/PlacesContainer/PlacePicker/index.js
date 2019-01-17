@@ -7,6 +7,7 @@ export default class PlacePicker extends Component {
     return (
       <div>
         <Geosuggest
+          onChange={this.props.removeLocation}
           onSuggestSelect={this.props.setLocation}
           placeholder={this.props.placeholder}
         />

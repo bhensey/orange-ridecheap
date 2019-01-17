@@ -9,6 +9,7 @@ export default class PlacesContainer extends Component {
     this.state = { start: null, end: null };
     this.setStart = this.setStart.bind(this);
     this.setEnd = this.setEnd.bind(this);
+
     this.callOnComplete = this.callOnComplete.bind(this);
   }
 
@@ -29,8 +30,8 @@ export default class PlacesContainer extends Component {
   render() {
     return (
       <div className="placesContainer">
-        <PlacePicker setLocation={this.setStart} placeholder="Start" />
-        <PlacePicker setLocation={this.setEnd} placeholder="End" />
+        <PlacePicker removeLocation={this.props.reset} setLocation={this.setStart} placeholder="Start" />
+        <PlacePicker removeLocation={this.props.reset} setLocation={this.setEnd} placeholder="End" />
       </div>
     );
   }

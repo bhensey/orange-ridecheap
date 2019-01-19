@@ -14,11 +14,11 @@ export default class Result extends React.Component {
     return (
       <div onClick={this.handleSelect} className="result">
         <img
-          src={require(`../../../static/${this.props.data.rideService}.png`)}
+          src={require(`../../../static/${this.props.data.brand}.png`)}
           className="rideService"
-          alt={this.props.data.rideService}
+          alt={this.props.data.brand}
         />
-        <div className="priceData">{this.props.data.priceData.price}</div>
+        <div className="priceData">{`$${this.props.data.avg_estimate} `}</div>
         <div className="average"> AVG </div>
       </div>
     );

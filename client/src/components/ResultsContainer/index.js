@@ -8,11 +8,11 @@ export default class ResultsContainer extends React.Component {
     return (
       <div className="resultsContainer">
         {this.props.results.map(result => (
-          <Result key={result.rideService} data={result} />
+          <Result key={result.brand} data={result} />
         ))}
         <img
           src={
-            this.props.results
+            this.props.results.length > 0
               ? require("../../static/car_2.png")
               : require("../../static/car_1.png")
           }

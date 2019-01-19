@@ -13,43 +13,30 @@ class App extends Component {
   }
 
   onGo(start, end) {
-    axios.get('http://127.0.0.1:5000/api/v1/uber', {
-      params: {
-        startLongitude: start.location.lng,
-        startLatitude: start.location.lat,
-        endLongitude: end.location.lng,
-        endLatitude: end.location.lat
+    let callRideshare=(url, start, end)=>{
+      return new Promise((resolve, reject)=>{
+        axios.get(url, {
+          params: {
+            startLongitude: start.location.lng,
+            startLatitude: start.location.lat,
+            endLongitude: end.location.lng,
+            endLatitude: end.location.lat
+          }
+        }).then((response) => {
+          resolve(response.data)
+        });
+      })
+    }
+    let promiseArray = []
+    promiseArray.push(callRideshare('http://127.0.0.1:5000/api/v1/uber', start, end))
+    promiseArray.push(callRideshare('http://127.0.0.1:5000/api/v1/lyft', start, end))
+    Promise.all(promiseArray).then(values=>{
+      let resultData = []
+      for (let  i in values){
+        resultData.push(values[i][0])
       }
-    }).then((response) => {
-      console.log(response.data)
-    });
-
-    axios.get('http://127.0.0.1:5000/api/v1/lyft', {
-      params: {
-        startLongitude: start.location.lng,
-        startLatitude: start.location.lat,
-        endLongitude: end.location.lng,
-        endLatitude: end.location.lat
-      }
-    }).then((response) => {
-      console.log(response.data)
-    });
-
-    let resultData = [
-      {
-        rideService: "Lyft",
-        priceData: { price: "$24.43" },
-        link:
-          "lyft://ridetype?id=lyft&pickup[latitude]=37.764728&pickup[longitude]=-122.422999&destination[latitude]=37.7763592&destination[longitude]=-122.4242038"
-      },
-      {
-        rideService: "Uber",
-        priceData: { price: "$25.12" },
-        link:
-          "lyft://ridetype?id=lyft&pickup[latitude]=37.764728&pickup[longitude]=-122.422999&destination[latitude]=37.7763592&destination[longitude]=-122.4242038"
-      }
-    ];
-    this.setState({ results: resultData });
+      this.setState({ results: resultData });
+    })
   }
 
   reset() {

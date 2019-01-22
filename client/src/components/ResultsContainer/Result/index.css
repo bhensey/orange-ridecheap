@@ -11,11 +11,15 @@
 
 .rideService,
 .priceData,
-.average {
+.average,
+.rideName {
   display: inline-block;
   color: white;
 }
 
+.rideName {
+  margin-right: 8px;
+}
 .rideService {
   width: 100px;
   font-size: 30px;

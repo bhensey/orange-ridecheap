@@ -16,6 +16,7 @@ class App extends Component {
     let callRideshare=(url, start, end)=>{
       return new Promise((resolve, reject)=>{
         axios.get(url, {
+          method: "GET",
           params: {
             startLongitude: start.location.lng,
             startLatitude: start.location.lat,
@@ -23,6 +24,10 @@ class App extends Component {
             endLatitude: end.location.lat,
             startName: start.label,
             endName: end.label
+          },
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*"
           }
         }).then((response) => {
           resolve(response.data)

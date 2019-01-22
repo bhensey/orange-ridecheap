@@ -32,10 +32,12 @@ class App extends Component {
     promiseArray.push(callRideshare('http://127.0.0.1:5000/api/v1/lyft', start, end))
     Promise.all(promiseArray).then(values=>{
       let resultData = []
-      for (let  i in values){
-        resultData.push(values[i][0])
-      }
-      this.setState({ results: resultData });
+      let mergedValues = values.flat()
+      mergedValues.sort((a, b) => {
+        return a.avg_estimate - b.avg_estimate
+      })
+
+      this.setState({ results: mergedValues });
     })
   }
 

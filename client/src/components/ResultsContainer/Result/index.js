@@ -18,7 +18,7 @@ export default class Result extends React.Component {
           className="rideService"
           alt={this.props.data.brand}
         />
-        <div className="priceData">{`$${this.props.data.avg_estimate} `}</div>
+        <div className="priceData">{this.props.data.name}: {`$${this.props.data.avg_estimate} `}</div>
         <div className="average"> AVG </div>
       </div>
     );

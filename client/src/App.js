@@ -20,7 +20,9 @@ class App extends Component {
             startLongitude: start.location.lng,
             startLatitude: start.location.lat,
             endLongitude: end.location.lng,
-            endLatitude: end.location.lat
+            endLatitude: end.location.lat,
+            startName: start.label,
+            endName: end.label
           }
         }).then((response) => {
           resolve(response.data)
@@ -28,16 +30,14 @@ class App extends Component {
       })
     }
     let promiseArray = []
-    promiseArray.push(callRideshare('http://127.0.0.1:5000/api/v1/uber', start, end))
-    promiseArray.push(callRideshare('http://127.0.0.1:5000/api/v1/lyft', start, end))
+    promiseArray.push(callRideshare(process.env.REACT_APP_SERVER + '/api/v1/uber', start, end))
+    promiseArray.push(callRideshare(process.env.REACT_APP_SERVER + '/api/v1/lyft', start, end))
     Promise.all(promiseArray).then(values=>{
       let resultData = []
-      let mergedValues = values.flat()
-      mergedValues.sort((a, b) => {
-        return a.avg_estimate - b.avg_estimate
-      })
-
-      this.setState({ results: mergedValues });
+      for (let  i in values){
+        resultData.push(values[i][0])
+      }
+      this.setState({ results: resultData });
     })
   }
 

@@ -1,9 +1,10 @@
 from uber_rides.session import Session
 from uber_rides.client import UberRidesClient
 import config
+from urllib.parse import urlencode, quote
 
 class uber:
-    def getUberEstimate(startLat, startLng, endLat, endLng):
+    def getUberEstimate(startLat, startLng, endLat, endLng, startName, endName):
         session = Session(server_token=config.uber['server_token'])
         client = UberRidesClient(session)
 
@@ -19,14 +20,14 @@ class uber:
     	)
 
         estimate = response.json.get('prices')
-        print(estimate)
         del estimate[0]
-        print(estimate)
+        
+        startNickname = quote(startName)
+        endNickname = quote(endName)
 
         results = []
         for x in estimate:
-          # TODO
-          link = "https://m.uber.com/ul/?client_id=<CLIENT_ID>&action=setPickup&pickup[latitude]="+startLat+"&pickup[longitude]="+startLng+"&pickup[nickname]=UberHQ&pickup[formatted_address]=1455%20Market%20St%2C%20San%20Francisco%2C%20CA%2094103&dropoff[latitude]="+endLat+"&dropoff[longitude]="+endLng+"&dropoff[nickname]=Coit%20Tower&dropoff[formatted_address]=1%20Telegraph%20Hill%20Blvd%2C%20San%20Francisco%2C%20CA%2094133&product_id=a1111c8c-c720-46c3-8534-2fcdd730040d&link_text=View%20team%20roster&partner_deeplink=partner%3A%2F%2Fteam%2F9383"
+          link = "https://m.uber.com/ul/?client_id=<CLIENT_ID>&action=setPickup&pickup[latitude]="+startLat+"&pickup[longitude]="+startLng+"&pickup[formatted_address]="+startNickname+"&dropoff[latitude]="+endLat+"&dropoff[longitude]="+endLng+"&dropoff[formatted_address]="+endNickname+"&product_id="+x["product_id"]+"&link_text=View%20team%20roster&partner_deeplink=partner%3A%2F%2Fteam%2F9383"
 
           obj = {
             "brand": "Uber",

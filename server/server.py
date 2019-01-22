@@ -24,10 +24,12 @@ def uberestimate():
   startLatitude = request.args.get("startLatitude")
   endLongitude = request.args.get("endLongitude")
   endLatitude = request.args.get("endLatitude")
+  startName = request.args.get("startName")
+  endName = request.args.get("endName")
 
-  uberresponse = uber.getUberEstimate(startLatitude, startLongitude, endLatitude, endLongitude)
+  uberresponse = uber.getUberEstimate(startLatitude, startLongitude, endLatitude, endLongitude, startName, endName)
   return jsonify(uberresponse)
 
 
 if __name__ == '__main__':
-  app.run(debug=True)
+  app.run(debug=True, port=8080)

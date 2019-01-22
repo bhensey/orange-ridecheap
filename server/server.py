@@ -2,9 +2,10 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from lyft import lyft
 from uber import uber
+import os
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 
 @app.route("/api/v1/lyft", methods=['GET'])
@@ -15,8 +16,9 @@ def lyftestimate():
   endLatitude = request.args.get("endLatitude")
 
   lyftresponse = lyft.getLyftEstimate(startLatitude, startLongitude, endLatitude, endLongitude)
-  return jsonify(lyftresponse)
-
+  response = jsonify(lyftresponse)
+  response.headers.add('Access-Control-Allow-Origin', '*')
+  return response
 
 @app.route("/api/v1/uber", methods=['GET'])
 def uberestimate():
@@ -28,8 +30,11 @@ def uberestimate():
   endName = request.args.get("endName")
 
   uberresponse = uber.getUberEstimate(startLatitude, startLongitude, endLatitude, endLongitude, startName, endName)
-  return jsonify(uberresponse)
+  
+  response = jsonify(uberresponse)
+  response.headers.add('Access-Control-Allow-Origin', '*')
+  return response
 
 
 if __name__ == '__main__':
-  app.run(debug=True, port=8080)
+  app.run(debug=True, port=os.environ.get('PORT', 8080))

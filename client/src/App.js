@@ -13,8 +13,8 @@ class App extends Component {
   }
 
   onGo(start, end) {
-    let callRideshare=(url, start, end)=>{
-      return new Promise((resolve, reject)=>{
+    let callRideshare = (url, start, end) => {
+      return new Promise((resolve, reject) => {
         axios.get(url, {
           method: "GET",
           params: {
@@ -37,12 +37,10 @@ class App extends Component {
     let promiseArray = []
     promiseArray.push(callRideshare(process.env.REACT_APP_SERVER + '/api/v1/uber', start, end))
     promiseArray.push(callRideshare(process.env.REACT_APP_SERVER + '/api/v1/lyft', start, end))
-    Promise.all(promiseArray).then(values=>{
-      let resultData = []
-      for (let  i in values){
-        resultData.push(values[i][0])
-      }
-      this.setState({ results: resultData });
+    Promise.all(promiseArray).then(values => {
+      let mergedValues = values.flat()
+      mergedValues.sort((a, b) => a.avg_estimate - b.avg_estimate)
+      this.setState({ results: mergedValues });
     })
   }
 

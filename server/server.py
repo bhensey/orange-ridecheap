@@ -30,11 +30,11 @@ def uberestimate():
   endName = request.args.get("endName")
 
   uberresponse = uber.getUberEstimate(startLatitude, startLongitude, endLatitude, endLongitude, startName, endName)
-  
+
   response = jsonify(uberresponse)
   response.headers.add('Access-Control-Allow-Origin', '*')
   return response
 
 
 if __name__ == '__main__':
-  app.run(debug=True, port=os.environ.get('PORT', 8080))
+  app.run(debug=True, port=os.environ.get('PORT', 5000))

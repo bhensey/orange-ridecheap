@@ -2,4 +2,25 @@
   margin-top: 0px;
   text-align: center;
   width: 100%;
+  display:  flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: space-between;
+}
+
+.resultsList {
+  margin-top: 0px;
+  text-align: center;
+  display:  flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width:  75vw;
+  max-width: 650px;
+}
+
+.fab{
+  width: 60vw !important;
+  max-width: 650px;
+
 }

@@ -1,6 +1,8 @@
 import Geosuggest from "react-geosuggest";
 import React, { Component } from "react";
 import "./index.css";
+import Fab from '@material-ui/core/Fab';
+
 
 export default class PlacePicker extends Component {
 
@@ -11,14 +13,14 @@ export default class PlacePicker extends Component {
 
   render() {
     return (
-      <div>
+      <div className="search">
         <Geosuggest
           ref={el=>this._geoSuggest=el}
           onChange={this.props.removeLocation}
           onSuggestSelect={this.props.setLocation}
           placeholder={this.props.placeholder}
         />
-        <button onClick={()=>this.onClear()}>Clear</button>
+        <Fab className="clear" onClick={()=>this.onClear()} size ='small'><i class="material-icons">close</i></Fab>
       </div>
     );
   }

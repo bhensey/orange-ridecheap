@@ -70,3 +70,12 @@
 .geosuggest__item__matched-text {
   font-weight: bold;
 }
+
+.search{
+  display: flex;
+}
+
+.clear{
+  margin-left: 2vw !important;
+  width: 7px;
+}

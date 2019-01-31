@@ -3,6 +3,7 @@ import PlacePicker from "./PlacePicker";
 import SearchButton from "./SearchButton";
 import "./index.css";
 
+
 export default class PlacesContainer extends Component {
   constructor(props) {
     super(props);

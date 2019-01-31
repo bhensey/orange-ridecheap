@@ -31,8 +31,8 @@ export default class PlacesContainer extends Component {
   render() {
     return (
       <div className="placesContainer">
-        <PlacePicker removeLocation={this.props.reset} setLocation={this.setStart} placeholder="Start" />
-        <PlacePicker removeLocation={this.props.reset} setLocation={this.setEnd} placeholder="End" />
+        <PlacePicker removeLocation={this.props.reset} setLocation={this.setStart} placeholder="Pick-up" />
+        <PlacePicker removeLocation={this.props.reset} setLocation={this.setEnd} placeholder="Drop-off" />
       </div>
     );
   }

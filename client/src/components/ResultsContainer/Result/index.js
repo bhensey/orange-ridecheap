@@ -15,13 +15,14 @@ export default class Result extends React.Component {
   render() {
     return (
       <Grow in={true}>
-        <Button 
-          color={this.props.data.brand == "Lyft" ? "primary" : "secondary"} 
-          variant="contained" 
-          onClick={this.handleSelect} 
+        <Button
+          color={this.props.data.brand == "Lyft" ? "primary" : "secondary"}
+          variant="contained"
+          onClick={this.handleSelect}
           className="result"
           size="small"
         >
+        <div className="request">REQUEST</div>
           <img
             src={require(`../../../static/${this.props.data.brand}.png`)}
             className="rideService"

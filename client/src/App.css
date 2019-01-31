@@ -1,6 +1,7 @@
 .App {
   margin-top: 70px;
   text-align: center;
+  height: 100vh;
 }
 
 html,
@@ -10,21 +11,6 @@ body{
   background: url('https://maps.googleapis.com/maps/api/staticmap?zoom=13&size=300x700&maptype=roadmap&markers=color:blue%7C%7C42.057858,-87.675837&key=AIzaSyA-H9SnK9o05ZokTu1wrw3pvB-vtwHDHH4');
   background-repeat: no-repeat;
   background-attachment: fixed;
-}
-
-.map-image{
-  height: 100vh;
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: -5;
-
-}
-
-.logo {
-  width: 100%;
-}
-
-.car {
-  width: 70%;
+  background-size: cover;
+  /* overflow: hidden; */
 }

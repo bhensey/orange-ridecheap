@@ -24,18 +24,18 @@ export default class ResultsContainer extends React.Component {
   render() {
     return (
       <div className="resultsContainer">
-        { 
-          this.props.results.length > 0 && 
+        {
+          this.props.results.length > 0 &&
           <div className="resultsList">
             <Result key={this.props.results[0].brand + this.props.results[0].name} data={this.props.results[0]} />
-            <Fab 
-              variant="extended" 
-              size="small" 
-              color="grey" 
+            <Fab
+              variant="extended"
+              size="small"
+              color="grey"
               onClick={this.toggleOtherOptions}
               className="fab"
             >
-              {this.state.showOtherOptions ? "Hide Other Options" : "Show Other Options"} 
+              {this.state.showOtherOptions ? "Hide Other Options" : "Show Other Options"}
             </Fab>
             {
               this.state.showOtherOptions &&
@@ -45,11 +45,6 @@ export default class ResultsContainer extends React.Component {
             }
           </div>
         }
-        {/*
-            this.props.results.length > 0
-              ? require("../../static/car_2.png")
-              : require("../../static/car_1.png")
-          */}
       </div>
     );
   }

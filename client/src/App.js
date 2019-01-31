@@ -65,18 +65,14 @@ class App extends Component {
     return (
       <MuiThemeProvider theme={theme} >
         <div className="App">
-          <img src={require("./static/logo.jpg")} alt="logo" className="logo" />
+           <img
+          className="map-image"
+          src="https://maps.googleapis.com/maps/api/staticmap?zoom=13&size=300x700&maptype=roadmap
+          &markers=color:blue%7C%7C42.057858,-87.675837
+          &key=AIzaSyA-H9SnK9o05ZokTu1wrw3pvB-vtwHDHH4"
+                  />
           <PlacesContainer reset={this.reset} onGo={this.onGo} />
           <ResultsContainer results={this.state.results} />
-          <img
-            src={
-              this.state.results.length > 0
-                ? require("./static/car_2.png")
-                : require("./static/car_1.png")
-            }
-            alt="car"
-            className="car"
-          /> 
         </div>
       </MuiThemeProvider>
     );

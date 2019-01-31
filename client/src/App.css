@@ -1,11 +1,21 @@
-body {
-  height: 100vh;
-  background-color: #4392f1;
-}
-
 .App {
   margin-top: 70px;
   text-align: center;
+}
+
+html,
+body{
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+.map-image{
+  height: 100vh;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -5;
 }
 
 .logo {

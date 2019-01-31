@@ -38,13 +38,18 @@ export default class ResultsContainer extends React.Component {
               {this.state.showOtherOptions ? "Hide Other Options" : "Show Other Options"} 
             </Fab>
             {
-              this.state.showOtherOptions && 
+              this.state.showOtherOptions &&
               this.props.results.slice(1).map(result => (
                 <Result key={result.brand + result.name} data={result} />
               ))
             }
           </div>
         }
+        {/*
+            this.props.results.length > 0
+              ? require("../../static/car_2.png")
+              : require("../../static/car_1.png")
+          */}
       </div>
     );
   }

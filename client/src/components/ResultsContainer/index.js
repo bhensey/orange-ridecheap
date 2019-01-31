@@ -22,29 +22,24 @@ export default class ResultsContainer extends React.Component {
   render() {
     return (
       <div className="resultsContainer">
-        { 
-          this.props.results.length > 0 && 
+        {
+          this.props.results.length > 0 &&
           <div>
             <Result key={this.props.results[0].brand + this.props.results[0].name} data={this.props.results[0]} />
             <button onClick={this.toggleOtherOptions}>{this.state.showOtherOptions ? "Hide Other Options" : "Show Other Options"} </button>
             {
-              this.state.showOtherOptions && 
+              this.state.showOtherOptions &&
               this.props.results.slice(1).map(result => (
                 <Result key={result.brand + result.name} data={result} />
               ))
             }
           </div>
         }
-        
-        <img
-          src={
+        {/*
             this.props.results.length > 0
               ? require("../../static/car_2.png")
               : require("../../static/car_1.png")
-          }
-          alt="car"
-          className="car"
-        />
+          */}
       </div>
     );
   }

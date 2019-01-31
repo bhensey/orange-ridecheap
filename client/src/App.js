@@ -65,12 +65,6 @@ class App extends Component {
     return (
       <MuiThemeProvider theme={theme} >
         <div className="App">
-          {/* <img
-          className="map-image"
-          src="https://maps.googleapis.com/maps/api/staticmap?zoom=13&size=300x700&maptype=roadmap
-          &markers=color:blue%7C%7C42.057858,-87.675837
-          &key=AIzaSyA-H9SnK9o05ZokTu1wrw3pvB-vtwHDHH4"
-                  />*/}
           <PlacesContainer reset={this.reset} onGo={this.onGo} />
           <ResultsContainer results={this.state.results} />
         </div>

@@ -5,6 +5,7 @@ import ResultsContainer from "./components/ResultsContainer";
 import axios from 'axios';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import grey from '@material-ui/core/colors/grey';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 const theme = createMuiTheme({
@@ -18,12 +19,16 @@ const theme = createMuiTheme({
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { results: [] };
+    this.state = { results: [], loading: false };
     this.onGo = this.onGo.bind(this);
     this.reset = this.reset.bind(this)
   }
 
   onGo(start, end) {
+    this.setState({
+      loading: true
+    })
+
     let callRideshare = (url, start, end) => {
       return new Promise((resolve, reject) => {
         axios.get(url, {
@@ -52,6 +57,7 @@ class App extends Component {
       let mergedValues = values.flat()
       mergedValues.sort((a, b) => a.avg_estimate - b.avg_estimate)
       this.setState({ results: mergedValues });
+      this.setState({ loading: false})
     })
   }
 
@@ -66,7 +72,7 @@ class App extends Component {
       <MuiThemeProvider theme={theme} >
         <div className="App">
           <PlacesContainer reset={this.reset} onGo={this.onGo} />
-          <ResultsContainer results={this.state.results} />
+          {this.state.loading ? <CircularProgress className="loader" size={80}color="secondary" /> : <ResultsContainer results={this.state.results} /> }
         </div>
       </MuiThemeProvider>
     );

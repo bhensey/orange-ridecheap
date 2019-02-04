@@ -9,9 +9,11 @@
   width: 100%;
   margin: 1em auto;
   text-align: left;
+  margin-right: -7px;
 }
 .geosuggest__input {
   width: 100%;
+  height: 36px;
   border: 2px solid transparent;
   box-shadow: 0 0 1px #3d464d;
   padding: 0.5em 1em;
@@ -71,11 +73,11 @@
   font-weight: bold;
 }
 
-.search{
+.search {
   display: flex;
 }
 
-.clear{
+.clear {
   margin-left: 2vw !important;
   width: 7px;
 }

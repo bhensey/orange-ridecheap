@@ -28,6 +28,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "google-map-react": "^1.1.2",
     "material-design-icons": "^3.0.1"
   }
 }

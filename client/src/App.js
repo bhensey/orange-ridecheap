@@ -6,7 +6,8 @@ import axios from 'axios';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import grey from '@material-ui/core/colors/grey';
 import CircularProgress from '@material-ui/core/CircularProgress';
-
+import SimpleMap from "./components/GoogleMaps";
+import GoogleMapReact from 'google-map-react'
 
 const theme = createMuiTheme({
   palette: {
@@ -19,7 +20,10 @@ const theme = createMuiTheme({
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { results: [], loading: false };
+    this.state = {
+      results: [],
+      loading: false,
+    };
     this.onGo = this.onGo.bind(this);
     this.reset = this.reset.bind(this)
   }
@@ -71,9 +75,10 @@ class App extends Component {
     return (
       <MuiThemeProvider theme={theme} >
         <div className="App">
-          <PlacesContainer reset={this.reset} onGo={this.onGo} />
-          {this.state.loading ? <CircularProgress className="loader" size={80}color="secondary" /> : <ResultsContainer results={this.state.results} /> }
-        </div>
+              <PlacesContainer reset={this.reset} onGo={this.onGo} />
+              {this.state.loading ? <CircularProgress className="loader" size={80}color="secondary" /> : <ResultsContainer results={this.state.results} /> }
+          </div>
+        <SimpleMap/>
       </MuiThemeProvider>
     );
   }

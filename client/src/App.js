@@ -7,6 +7,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import grey from '@material-ui/core/colors/grey';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import SimpleMap from "./components/GoogleMap";
+import Snackbar from "@material-ui/core/Snackbar";
 
 
 const theme = createMuiTheme({
@@ -20,7 +21,7 @@ const theme = createMuiTheme({
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { results: [], loading: false, center: {lat: 42.057858, lng: -87.675837}, zoom: 11 };
+    this.state = { results: [], loading: false, center: {lat: 42.057858, lng: -87.675837}, zoom: 11, Error: false };
     this.onGo = this.onGo.bind(this);
     this.reset = this.reset.bind(this);
     this.updateStart = this.updateStart.bind(this);
@@ -58,6 +59,10 @@ class App extends Component {
           }
         }).then((response) => {
           resolve(response.data)
+        })
+        .catch(error => {
+          this.setState({loading: false});
+          this.setState({Error: true});
         });
       })
     }
@@ -69,6 +74,7 @@ class App extends Component {
       mergedValues.sort((a, b) => a.avg_estimate - b.avg_estimate)
       this.setState({ results: mergedValues });
       this.setState({ loading: false})
+      this.setState({Error: false});
     })
   }
 
@@ -84,6 +90,12 @@ class App extends Component {
         <div className="App">
           <PlacesContainer updateStart={this.updateStart} reset={this.reset} onGo={this.onGo} />
           {this.state.loading ? <CircularProgress className="loader" size={80}color="secondary" /> : <ResultsContainer results={this.state.results} /> }
+          <Snackbar
+            open={this.state.Error}
+            autoHideDuration={600}
+            anchorOrigin={{vertical: "top", horizontal: "center"}}
+            message={<span>NO DRIVERS AVAILABLE</span>}
+          />
         </div>
         <SimpleMap center={this.state.center} zoom={this.state.zoom}>
         </SimpleMap>

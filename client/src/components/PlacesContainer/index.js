@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PlacePicker from "./PlacePicker";
-import SearchButton from "./SearchButton";
 import "./index.css";
 
 
@@ -16,7 +15,9 @@ export default class PlacesContainer extends Component {
   }
 
   setStart(location) {
-    this.setState({ start: location }, this.callOnComplete);
+     this.setState({ start: location }, () => {
+      this.callOnComplete()
+      this.props.updateStart(location)});
   }
 
   setEnd(location) {

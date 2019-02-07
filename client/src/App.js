@@ -6,6 +6,7 @@ import axios from 'axios';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import grey from '@material-ui/core/colors/grey';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import SimpleMap from "./components/GoogleMap";
 
 
 const theme = createMuiTheme({
@@ -19,9 +20,19 @@ const theme = createMuiTheme({
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { results: [], loading: false };
+    this.state = { results: [], loading: false, center: {lat: 42.057858, lng: -87.675837}, zoom: 11 };
     this.onGo = this.onGo.bind(this);
-    this.reset = this.reset.bind(this)
+    this.reset = this.reset.bind(this);
+    this.updateStart = this.updateStart.bind(this);
+  }
+
+  updateStart(start){
+    this.setState({
+      center:{
+        lat: start.location.lat,
+        lng: start.location.lng
+      }
+    })
   }
 
   onGo(start, end) {
@@ -71,9 +82,11 @@ class App extends Component {
     return (
       <MuiThemeProvider theme={theme} >
         <div className="App">
-          <PlacesContainer reset={this.reset} onGo={this.onGo} />
+          <PlacesContainer updateStart={this.updateStart} reset={this.reset} onGo={this.onGo} />
           {this.state.loading ? <CircularProgress className="loader" size={80}color="secondary" /> : <ResultsContainer results={this.state.results} /> }
         </div>
+        <SimpleMap center={this.state.center} zoom={this.state.zoom}>
+        </SimpleMap>
       </MuiThemeProvider>
     );
   }

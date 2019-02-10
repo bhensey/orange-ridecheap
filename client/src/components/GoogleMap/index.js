@@ -11,12 +11,22 @@ class SimpleMap extends Component {
           bootstrapURLKeys={{ key: "AIzaSyB6WxBLgtBadFQ7lJw6GXcYhQ1L-1CKFjo" }}
           center={this.props.center}
           zoom={this.props.zoom}>
-            <Icon lat={42.057858} lng={-87.675837}>
+
+          {
+            this.props.start ?
+            <Icon lat={this.props.start.lat} lng={this.props.start.lng}>
                 place
-            </Icon>
+            </Icon> :
+            null}
+
+          {
+            this.props.end ?
             <Icon lat={41.8789} lng={-87.6359}>
                 place
             </Icon>
+            :
+            null
+          }
         </GoogleMapReact>
       </div>
     );

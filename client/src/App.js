@@ -21,17 +21,31 @@ const theme = createMuiTheme({
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { results: [], loading: false, center: {lat: 42.057858, lng: -87.675837}, zoom: 11, Error: false };
+    this.state = { results: [], loading: false, center: {lat: 42.057858, lng: -87.675837}, zoom: 11, Error: false, selectedStart: null, selectedEnd: null };
     this.onGo = this.onGo.bind(this);
     this.reset = this.reset.bind(this);
     this.updateStart = this.updateStart.bind(this);
+    this.updateEnd = this.updateEnd.bind(this);
   }
 
   updateStart(start){
     this.setState({
+      start: {
+        lat: start.location.lat,
+        lng: start.location.lng
+      },
       center:{
         lat: start.location.lat,
         lng: start.location.lng
+      }
+    })
+  }
+
+  updateEnd(end){
+    this.setState({
+      end: {
+        lat:end.location.lat,
+        lng:end.location.lng
       }
     })
   }
@@ -80,7 +94,7 @@ class App extends Component {
 
   reset() {
     this.setState({
-      results: []
+      results: [],
     })
   }
 
@@ -88,7 +102,7 @@ class App extends Component {
     return (
       <MuiThemeProvider theme={theme} >
         <div className="App">
-          <PlacesContainer updateStart={this.updateStart} reset={this.reset} onGo={this.onGo} />
+          <PlacesContainer updateStart={this.updateStart} updateEnd={this.updateEnd} reset={this.reset} onGo={this.onGo} />
           {this.state.loading ? <CircularProgress className="loader" size={80}color="secondary" /> : <ResultsContainer results={this.state.results} /> }
           <Snackbar
             open={this.state.Error}
@@ -97,8 +111,7 @@ class App extends Component {
             message={<span>NO DRIVERS AVAILABLE</span>}
           />
         </div>
-        <SimpleMap center={this.state.center} zoom={this.state.zoom}>
-        </SimpleMap>
+        <SimpleMap center={this.state.center} zoom={this.state.zoom} start={this.state.start} end={this.state.end}/>
       </MuiThemeProvider>
     );
   }

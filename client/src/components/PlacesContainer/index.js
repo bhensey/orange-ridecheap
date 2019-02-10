@@ -21,7 +21,10 @@ export default class PlacesContainer extends Component {
   }
 
   setEnd(location) {
-    this.setState({ end: location }, this.callOnComplete);
+    this.setState({ end: location }, () => {
+      this.callOnComplete()
+      this.props.updateEnd(location)
+    });
   }
 
   callOnComplete() {

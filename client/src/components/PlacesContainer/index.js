@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PlacePicker from "./PlacePicker";
 import "./index.css";
 
-
 export default class PlacesContainer extends Component {
   constructor(props) {
     super(props);
@@ -28,7 +27,6 @@ export default class PlacesContainer extends Component {
       this.callOnComplete()
       if(this.state.end){
         this.props.updateEnd(location)
-
       }
     });
   }
@@ -43,26 +41,40 @@ export default class PlacesContainer extends Component {
   }
 
   removeStartLocation() {
-    this.setState({
-      start: null
-    }, () => {
-      this.props.reset()
-    })
+    this.setState(
+      {
+        start: null
+      },
+      () => {
+        this.props.updateStart(null);
+      }
+    );
   }
 
   removeEndLocation() {
-    this.setState({
-      end: null
-    }, () => {
-      this.props.reset()
-    })
+    this.setState(
+      {
+        end: null
+      },
+      () => {
+        this.props.updateEnd(null);
+      }
+    );
   }
 
   render() {
     return (
       <div className="placesContainer">
-        <PlacePicker removeLocation={this.removeStartLocation} setLocation={this.setStart} placeholder="Pick-up" />
-        <PlacePicker removeLocation={this.removeEndLocation} setLocation={this.setEnd} placeholder="Drop-off" />
+        <PlacePicker
+          removeLocation={this.removeStartLocation}
+          setLocation={this.setStart}
+          placeholder="Pick-up"
+        />
+        <PlacePicker
+          removeLocation={this.removeEndLocation}
+          setLocation={this.setEnd}
+          placeholder="Drop-off"
+        />
       </div>
     );
   }

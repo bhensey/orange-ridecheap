@@ -21,7 +21,7 @@ class SimpleMap extends Component {
 
           {
             this.props.end ?
-            <Icon lat={41.8789} lng={-87.6359}>
+            <Icon lat={this.props.end.lat} lng={this.props.end.lng}>
                 place
             </Icon>
             :

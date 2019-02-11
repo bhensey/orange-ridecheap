@@ -17,19 +17,28 @@ export default class PlacesContainer extends Component {
   setStart(location) {
      this.setState({ start: location }, () => {
       this.callOnComplete()
-      this.props.updateStart(location)});
+      if(this.state.start){
+        this.props.updateStart(location)
+      }
+    });
   }
 
   setEnd(location) {
     this.setState({ end: location }, () => {
       this.callOnComplete()
-      this.props.updateEnd(location)
+      if(this.state.end){
+        this.props.updateEnd(location)
+
+      }
     });
   }
 
   callOnComplete() {
     if (this.state.start && this.state.end) {
       this.props.onGo(this.state.start, this.state.end);
+      let avglat = ((this.state.start.location.lat + this.state.end.location.lat) / 2);
+      let avglng = ((this.state.start.location.lng + this.state.end.location.lng) / 2);
+      this.props.updateCenter({lat: avglat, lng:avglng})    
     }
   }
 

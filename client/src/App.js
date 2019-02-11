@@ -26,6 +26,7 @@ class App extends Component {
     this.reset = this.reset.bind(this);
     this.updateStart = this.updateStart.bind(this);
     this.updateEnd = this.updateEnd.bind(this);
+    this.updateCenter = this.updateCenter.bind(this);
   }
 
   updateStart(start){
@@ -46,6 +47,15 @@ class App extends Component {
       end: {
         lat:end.location.lat,
         lng:end.location.lng
+      }
+    })
+  }
+
+  updateCenter(location){
+    this.setState({
+      center:{
+        lat: location.lat,
+        lng: location.lng
       }
     })
   }
@@ -94,7 +104,7 @@ class App extends Component {
 
   reset() {
     this.setState({
-      results: [],
+      results: []
     })
   }
 
@@ -102,7 +112,7 @@ class App extends Component {
     return (
       <MuiThemeProvider theme={theme} >
         <div className="App">
-          <PlacesContainer updateStart={this.updateStart} updateEnd={this.updateEnd} reset={this.reset} onGo={this.onGo} />
+          <PlacesContainer updateCenter={this.updateCenter} updateStart={this.updateStart} updateEnd={this.updateEnd} reset={this.reset} onGo={this.onGo} />
           {this.state.loading ? <CircularProgress className="loader" size={80}color="secondary" /> : <ResultsContainer results={this.state.results} /> }
           <Snackbar
             open={this.state.Error}

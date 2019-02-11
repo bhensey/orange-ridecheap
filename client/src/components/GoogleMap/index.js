@@ -17,10 +17,10 @@ class SimpleMap extends Component {
               place
             </Icon>
           ) : null}
-
-          {this.props.end ? (
+          {
+            this.props.end ?
             <Icon lat={this.props.end.lat} lng={this.props.end.lng}>
-              place
+                place
             </Icon>
           ) : null}
         </GoogleMapReact>

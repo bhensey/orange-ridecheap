@@ -33,6 +33,7 @@ class App extends Component {
     this.reset = this.reset.bind(this);
     this.updateStart = this.updateStart.bind(this);
     this.updateEnd = this.updateEnd.bind(this);
+    this.updateCenter = this.updateCenter.bind(this);
   }
 
   updateStart(start) {
@@ -69,6 +70,15 @@ class App extends Component {
         results: []
       });
     }
+  }
+
+  updateCenter(location){
+    this.setState({
+      center:{
+        lat: location.lat,
+        lng: location.lng
+      }
+    })
   }
 
   onGo(start, end) {
@@ -123,23 +133,15 @@ class App extends Component {
     this.setState({
       results: []
     });
+
   }
 
   render() {
     return (
       <MuiThemeProvider theme={theme}>
         <div className="App">
-          <PlacesContainer
-            updateStart={this.updateStart}
-            updateEnd={this.updateEnd}
-            reset={this.reset}
-            onGo={this.onGo}
-          />
-          {this.state.loading ? (
-            <CircularProgress className="loader" size={80} color="secondary" />
-          ) : (
-            <ResultsContainer results={this.state.results} />
-          )}
+          <PlacesContainer updateCenter={this.updateCenter} updateStart={this.updateStart} updateEnd={this.updateEnd} reset={this.reset} onGo={this.onGo} />
+          {this.state.loading ? <CircularProgress className="loader" size={80}color="secondary" /> : <ResultsContainer results={this.state.results} /> }
           <Snackbar
             open={this.state.Error}
             autoHideDuration={600}

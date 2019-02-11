@@ -4,6 +4,7 @@ import "./index.css";
 import Fab from "@material-ui/core/Fab";
 
 export default class PlacePicker extends Component {
+
   onClear() {
     this.props.removeLocation();
     this._geoSuggest.clear();
